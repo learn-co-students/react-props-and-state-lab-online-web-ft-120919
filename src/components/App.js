@@ -15,54 +15,24 @@ class App extends React.Component {
     }
   }
 
-
-  
-
-
   handleFetch = () => {
+    let url
     if (this.state.filters.type === 'cat'){
-      let url = '/api/pets?type=cat'
-      fetch(url)
-    .then(resp=>resp.json())
-    .then(jsonData=>
-      this.setState({
-        pets: jsonData
-      })
-      )
-      // fetch('/api/pets?type=cat')
+       url = '/api/pets?type=cat'
     } else if (this.state.filters.type === 'dog') {
-      // fetch('/api/pets?type=dog')
-      let url = '/api/pets?type=dog'
-      fetch(url)
-    .then(resp=>resp.json())
-    .then(jsonData=>
-      this.setState({
-        pets: jsonData
-      })
-      )
+       url = '/api/pets?type=dog'
     } else if (this.state.filters.type === 'micropig') {
-      // fetch('/api/pets?type=micropig')
-      let url = '/api/pets?type=micropig'
-      fetch(url)
-    .then(resp=>resp.json())
-    .then(jsonData=>
-      this.setState({
-        pets: jsonData
-      })
-      )
+       url = '/api/pets?type=micropig'
     } else {
-      let url = '/api/pets'
-      fetch(url)
+      url = '/api/pets'
+    }
+    fetch(url)
     .then(resp=>resp.json())
     .then(jsonData=>
-      
       this.setState({
         pets: jsonData
-        
       })
       )
-      // fetch('/api/pets')
-    }
     
   }
 
@@ -107,6 +77,7 @@ class App extends React.Component {
             </div>
             <div className="twelve wide column">
               <PetBrowser 
+              pets={this.state.pets}
               onAdoptPet={this.isAdoptedFunct}
               />
             </div>
