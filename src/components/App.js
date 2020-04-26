@@ -19,59 +19,31 @@ class App extends React.Component {
   handleChangeType = (petType) => {
     this.setState = ({
       filters: {
+        ...this.state.filters,
         type: petType
       }
     })
+    debugger
   }
 
   findPets = () => {
-    if (this.state.filters.type === "cat") {
-      fetch("/api/pets?type=cat")
-        .then(resp => resp.json())
-        .then(data => {
-          this.setState({
-            pets: data
-          })
-        })
-    } else if (this.state.filters.type === "dog") {
-      fetch("/api/pets?type=dog")
-        .then(resp => resp.json())
-        .then(data => {
-          this.setState({
-            pets: data
-          })
-        })
-    } else if (this.state.filters.type === "micropig") {
-      fetch("/api/pets?type=micropig")
-        .then(resp => resp.json())
-        .then(data => {
-          this.setState({
-            pets: data
-          })
-        })
-    } else {
-      fetch("/api/pets")
-        .then(resp => resp.json())
-        .then(data => {
-          this.setState({
-            pets: data
-          })
-        })
+    debugger
+    let url = '/api/pets'
+
+    if (this.state.filters.type != "all") {
+      url += `?type=${this.state.filters.type}`
     }
+
+    fetch(url)
+      .then(resp => resp.json())
+      .then(data => this.setState({ pets: data }))
   }
 
-  // handleData = (data) => {
-  //   this.setState({
-  //     pets: data
-  //   })
-  // }
-
   handleAdopt = (id) => {
-    this.state.pets.find(pet => {
-      if (pet.id === id) {
-        pet.isAdopted = true
-      }
+    const pets = this.state.pets.map(pet => {
+      return pet.id === id ? { ...pet, isAdopted: true } : pet
     })
+    this.setState({ pets: pets })
   }
 
   render() {
