@@ -27,36 +27,44 @@ class App extends React.Component {
   findPets = () => {
     if (this.state.filters.type === "cat") {
       fetch("/api/pets?type=cat")
-        .then(resp => resp.json)
+        .then(resp => resp.json())
         .then(data => {
-          this.handleData(data)
+          this.setState({
+            pets: data
+          })
         })
     } else if (this.state.filters.type === "dog") {
       fetch("/api/pets?type=dog")
-        .then(resp => resp.json)
+        .then(resp => resp.json())
         .then(data => {
-          this.handleData(data)
+          this.setState({
+            pets: data
+          })
         })
     } else if (this.state.filters.type === "micropig") {
       fetch("/api/pets?type=micropig")
-        .then(resp => resp.json)
+        .then(resp => resp.json())
         .then(data => {
-          this.handleData(data)
+          this.setState({
+            pets: data
+          })
         })
     } else {
       fetch("/api/pets")
-        .then(resp => resp.json)
+        .then(resp => resp.json())
         .then(data => {
-          this.handleData(data)
+          this.setState({
+            pets: data
+          })
         })
     }
   }
 
-  handleData = (data) => {
-    this.setState({
-      pets: data
-    })
-  }
+  // handleData = (data) => {
+  //   this.setState({
+  //     pets: data
+  //   })
+  // }
 
   handleAdopt = (id) => {
     this.state.pets.find(pet => {
