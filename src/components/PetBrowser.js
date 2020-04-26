@@ -3,8 +3,25 @@ import React from 'react'
 import Pet from './Pet'
 
 class PetBrowser extends React.Component {
+
+  constructor() {
+    this.state = {
+      pet: pet
+    }
+  }
+
+  handlePets = () => {
+    this.props.pets.forEach(pet => pet)
+  }
+
   render() {
-    return <div className="ui cards">PET COMPONENT SHOULD GO HERE</div>
+    debugger
+
+    return <div className="ui cards">
+      <Pet pet={this.handlePets} onAdoptPet={this.props.onAdoptPet} />
+    </div>
+
+
   }
 }
 
